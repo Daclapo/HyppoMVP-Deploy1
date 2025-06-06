@@ -23,7 +23,13 @@ interface CounterargumentOverlayProps {
 }
 
 export default function CounterargumentOverlay({ isOpen, onClose, argument, session }: CounterargumentOverlayProps) {
-  const [counterarguments, setCounterarguments] = useState<any[]>([]);
+  const [counterarguments, setCounterarguments] = useState<{
+    id: string;
+    content: string;
+    created_at: string;
+    profiles: { username: string } | null;
+    user_id: string;
+  }[]>([]);
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,7 +97,7 @@ export default function CounterargumentOverlay({ isOpen, onClose, argument, sess
       // Es importante asegurar que se desactive el estado de isSubmitting antes de fetchCounterarguments
       setIsSubmitting(false);
       await fetchCounterarguments();
-      
+
       // Confirmar al usuario que se ha añadido el contraargumento
       console.log('Contraargumento añadido correctamente:', data);
     } catch (error) {
@@ -131,20 +137,20 @@ export default function CounterargumentOverlay({ isOpen, onClose, argument, sess
                 Por {argument.profiles?.username} · {new Date(argument.created_at).toLocaleDateString()}
               </span>
               <span className={`font-medium ${
-                argument.is_in_favor ? 
-                  (argument.intensity === 1 ? 'text-green-400' : 
-                   argument.intensity === 2 ? 'text-green-500' : 
+                argument.is_in_favor ?
+                  (argument.intensity === 1 ? 'text-green-400' :
+                   argument.intensity === 2 ? 'text-green-500' :
                    'text-green-600 font-bold') :
-                  (argument.intensity === 1 ? 'text-red-400' : 
-                   argument.intensity === 2 ? 'text-red-500' : 
+                  (argument.intensity === 1 ? 'text-red-400' :
+                   argument.intensity === 2 ? 'text-red-500' :
                    'text-red-600 font-bold')
               }`}>
-                {argument.is_in_favor ? 
-                  (argument.intensity === 1 ? 'Algo a favor' : 
-                   argument.intensity === 2 ? 'A favor' : 
+                {argument.is_in_favor ?
+                  (argument.intensity === 1 ? 'Algo a favor' :
+                   argument.intensity === 2 ? 'A favor' :
                    'Muy a favor') :
-                  (argument.intensity === 1 ? 'Algo en contra' : 
-                   argument.intensity === 2 ? 'En contra' : 
+                  (argument.intensity === 1 ? 'Algo en contra' :
+                   argument.intensity === 2 ? 'En contra' :
                    'Muy en contra')
                 }
               </span>

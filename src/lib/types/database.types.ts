@@ -325,7 +325,8 @@ export interface Database {
             referencedColumns: ["id"]
           }
         ]
-      }      debate_questions: {
+      },
+      debate_questions: {
         Row: {
           id: string
           user_id: string

@@ -74,10 +74,17 @@ export default function AllPostsPage() {
       return `${years}a`;
     }
   }, []);
-
   // Función para agrupar publicaciones por fecha
-  const groupPostsByDate = useCallback((posts: any[]) => {
-    const grouped: any = {};
+  const groupPostsByDate = useCallback((posts: {
+    id: string;
+    title: string;
+    upvote_count: number;
+    created_at: string;
+    author: { username: string };
+    timeAgo: string;
+    isStarred: boolean;
+  }[]) => {
+    const grouped: Record<string, typeof posts> = {};
 
     posts.forEach(post => {
       const date = new Date(post.created_at);
