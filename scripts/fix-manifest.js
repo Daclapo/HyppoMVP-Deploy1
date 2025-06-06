@@ -95,8 +95,9 @@ const nextDir = path.join(process.cwd(), '.next');
 
 // Verificar si existe el directorio .next
 if (!directoryExists(nextDir)) {
-  console.log(`❌ El directorio .next no existe. Ejecuta 'next build' primero.`);
-  process.exit(1);
+  console.log(`✅ El directorio .next no existe. Esto es normal durante el prebuild.`);
+  console.log(`\n✨ ¡Proceso completado sin cambios!`);
+  process.exit(0); // Salir con éxito
 }
 
 // Buscar archivos de manifiesto

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node ./scripts/verify-deploy.js && node ./scripts/cleanup.js && node ./scripts/fix-manifest.js",
+    "prebuild": "node ./scripts/verify-deploy.js && node ./scripts/cleanup.js",
     "build": "next build",
     "postbuild": "node ./scripts/fix-manifest.js",
     "start": "next start",
