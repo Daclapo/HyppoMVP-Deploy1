@@ -11,3 +11,7 @@ README.md
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Directorios problemáticos
+src/app/(home)
+(home)

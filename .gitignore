@@ -17,6 +17,11 @@
 /.next/
 /out/
 
+# Ignore problematic folders
+/src/app/(home)/
+/(home)/
+**/\(home\)/**
+
 # production
 /build
 

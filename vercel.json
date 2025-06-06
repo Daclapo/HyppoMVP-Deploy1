@@ -1,3 +1,12 @@
 {
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "buildCommand": "npm run clean && npm run build",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ]
 }

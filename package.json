@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node ./scripts/verify-deploy.js && node ./scripts/cleanup.js && node ./scripts/fix-manifest.js",
     "build": "next build",
+    "postbuild": "node ./scripts/fix-manifest.js",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "node ./scripts/verify-deploy.js"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
