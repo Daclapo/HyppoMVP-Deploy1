@@ -1,0 +1,13 @@
+# Ignorar archivos y directorios que no son necesarios para el despliegue
+.git
+node_modules
+README.md
+.gitignore
+*.log
+*.bak
+*.new
+*.old
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
