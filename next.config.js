@@ -6,10 +6,6 @@ const nextConfig = {
   reactStrictMode: true,
   // Configuraciones para mejorar la compatibilidad con Vercel
   output: 'standalone', // Modo optimizado para producción
-  // Activar el SWC minifier para mejorar el rendimiento
-  swcMinify: true,
-  // Solución para el error de client-reference-manifest
-  distDir: '.next',
   // Configuración de imágenes
   images: {
     remotePatterns: [
@@ -28,17 +24,12 @@ const nextConfig = {
   typescript: {
     // ⚠️ Peligroso pero necesario para el deploy
     ignoreBuildErrors: true,
-  },
-  // Configuración experimental para resolver problemas con el manifiesto de cliente
+  },  // Configuración experimental para resolver problemas con el manifiesto de cliente
   experimental: {
-    // Aumentar el tiempo de espera para la compilación
-    clientRouterFilter: false,
-    // Mejorar el manejo de carpetas especiales como (home)
-    clientComponentsSSR: true,
-    // Forzar la regeneración completa del build
+    // Optimización de CSS que requiere el módulo critters
     optimizeCss: true,
-    // Permitir esquemas de nombre de carpetas especiales
-    serverComponentsExternalPackages: [],
+    // Actualizado según la recomendación de Next.js
+    serverExternalPackages: [],
   },
   webpack: (config, { dev }) => {
     if (dev) {
