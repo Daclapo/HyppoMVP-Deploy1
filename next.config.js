@@ -4,8 +4,6 @@ const path = require('path');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Configuraciones para mejorar la compatibilidad con Vercel
-  output: 'standalone', // Modo optimizado para producción
   // Configuración de imágenes
   images: {
     remotePatterns: [
@@ -27,9 +25,7 @@ const nextConfig = {
   },  // Configuración experimental para resolver problemas con el manifiesto de cliente
   experimental: {
     // Optimización de CSS que requiere el módulo critters
-    optimizeCss: true,
-    // Actualizado según la recomendación de Next.js
-    serverExternalPackages: [],
+    optimizeCss: true
   },
   webpack: (config, { dev }) => {
     if (dev) {
