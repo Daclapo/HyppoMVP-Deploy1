@@ -11,6 +11,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import { useAuth } from "@/context/AuthContext"
+import UserMenuNew from "@/components/UserMenuNew"
 
 interface Post {
   id: string;
@@ -377,18 +378,22 @@ export default function PostPage() {
         month: "long",
         day: "numeric"
       })
-    : "Fecha desconocida";
-  return (
+    : "Fecha desconocida";  return (
     <div id="top" className="min-h-screen bg-black text-white flex flex-col">
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
         <Link href="/">
           <div className="flex items-center">
-            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
+            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={55} height={55} className="mr-2" />
           </div>
         </Link>
+        {user && (
+          <div className="flex items-center">
+            <UserMenuNew />
+          </div>
+        )}
       </nav>
-      
-      <div className="flex-1 pt-24 pb-12 px-6">
+
+      <div className="flex-1 pt-32 pb-12 px-6">
         <div className="max-w-3xl mx-auto">
           {/* Botones de navegación */}
           <div className="flex justify-between mb-6">
@@ -399,14 +404,6 @@ export default function PostPage() {
             >
               ← Volver atrás
             </Button>
-            <a href="#top">
-              <Button
-                variant="outline"
-                className="border-gray-600 hover:bg-gray-800 text-white text-sm"
-              >
-                ↑ Volver al inicio
-              </Button>
-            </a>
           </div>
 
           {/* Cabecera del post */}
@@ -477,10 +474,20 @@ export default function PostPage() {
             )}
           </div>          {/* Sección de comentarios */}
           <div className="mt-12 border-t border-gray-800 pt-8">
-            <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-              <MessageCircle className="w-5 h-5" />
-              Comentarios ({comments.length})
-            </h2>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold flex items-center gap-2">
+                <MessageCircle className="w-5 h-5" />
+                Comentarios ({comments.length})
+              </h2>
+              <a href="#top">
+                <Button
+                  variant="outline"
+                  className="border-gray-600 hover:bg-gray-800 text-white text-sm"
+                >
+                  ↑ Volver al Inicio de la Publicación
+                </Button>
+              </a>
+            </div>
 
             {/* Lista de comentarios */}
             {comments.length > 0 ? (
@@ -511,16 +518,8 @@ export default function PostPage() {
             )}            {/* Formulario para añadir comentario */}
             {user ? (
               <div className="bg-gray-800/30 rounded-lg p-4">
-                <div className="flex justify-between items-center mb-3">
+                <div className="mb-3">
                   <h3 className="text-sm font-medium text-gray-300">Añadir un comentario</h3>
-                  <a href="#top">
-                    <Button
-                      variant="outline"
-                      className="border-gray-600 hover:bg-gray-800 text-white text-sm"
-                    >
-                      ↑ Volver al Inicio de la Publicación
-                    </Button>
-                  </a>
                 </div>
                 <textarea
                   value={newComment}

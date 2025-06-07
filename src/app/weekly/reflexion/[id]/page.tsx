@@ -219,7 +219,7 @@ export default function ReflectionPage({ params }: { params: Promise<RouteParams
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">        <div className="flex items-center">
           <Link href="/">
-            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
+            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={55} height={55} className="mr-2" />
           </Link>
         </div>
 
@@ -280,10 +280,9 @@ export default function ReflectionPage({ params }: { params: Promise<RouteParams
             </a>
             <a href="#" className="block text-white hover:text-gray-300 text-lg">
               About
-            </a>
-          </nav>
+            </a>          </nav>
         </aside>        {/* Main Content */}
-        <div className="flex-1 mt-[88px] pl-64">
+        <div className="flex-1 mt-[88px]">
           <main className="p-6 max-w-5xl mx-auto">
             {loading ? (
               <div className="text-center py-12 text-gray-400">Cargando reflexión...</div>

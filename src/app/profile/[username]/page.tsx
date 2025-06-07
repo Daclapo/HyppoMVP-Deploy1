@@ -1,13 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import EditProfileModal from "@/components/EditProfileModal"
 import { useAuth } from "@/context/AuthContext"
+import UserMenuNew from "@/components/UserMenuNew"
 
 interface Post {
   id: string;
@@ -25,12 +26,17 @@ interface Profile {
 }
 
 export default function ProfilePage() {
-  const params = useParams();  const username = params.username as string;
+  const params = useParams();
+  const username = params.username as string;
   const supabase = createClient();
-  const [profile, setProfile] = useState<Profile | null>(null);  const [posts, setPosts] = useState<Post[]>([]);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);  const [showEditModal, setShowEditModal] = useState(false);  const [isOwnProfile, setIsOwnProfile] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
   const { user, session } = useAuth();
+  const router = useRouter();
   useEffect(() => {
     async function fetchData() {
       setLoading(true);      try {
@@ -138,20 +144,24 @@ export default function ProfilePage() {
       month: "long",
       day: "numeric"
     });
-  }
-  // Mostrar pantalla de carga si está cargando
+  }  // Mostrar pantalla de carga si está cargando
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col">
         <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
           <Link href="/">
             <div className="flex items-center">
-              <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
+              <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={55} height={55} className="mr-2" />
             </div>
           </Link>
+          {user && (
+            <div className="flex items-center">
+              <UserMenuNew />
+            </div>
+          )}
         </nav>
 
-        <div className="flex-1 pt-24 flex justify-center items-center">
+        <div className="flex-1 pt-32 flex justify-center items-center">
           <div className="text-center text-gray-400">Cargando perfil...</div>
         </div>
       </div>
@@ -165,12 +175,17 @@ export default function ProfilePage() {
         <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
           <Link href="/">
             <div className="flex items-center">
-              <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
+              <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={55} height={55} className="mr-2" />
             </div>
           </Link>
+          {user && (
+            <div className="flex items-center">
+              <UserMenuNew />
+            </div>
+          )}
         </nav>
 
-        <div className="flex-1 pt-24 flex flex-col justify-center items-center">
+        <div className="flex-1 pt-32 flex flex-col justify-center items-center">
           <div className="text-red-400 mb-4">{error || "Perfil no encontrado"}</div>
           <Link href="/">
             <Button className="bg-gray-800 hover:bg-gray-700 text-white">Volver al inicio</Button>
@@ -179,15 +194,19 @@ export default function ProfilePage() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen bg-black text-white">
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
         <div className="flex items-center">
           <Link href="/">
-            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
+            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={55} height={55} className="mr-2" />
           </Link>
         </div>
+        {user && (
+          <div className="flex items-center">
+            <UserMenuNew />
+          </div>
+        )}
       </nav>
 
       <div className="flex">
@@ -227,11 +246,20 @@ export default function ProfilePage() {
               About
             </a>
           </nav>
-        </aside>
-
-        {/* Main Content */}
+        </aside>        {/* Main Content */}
         <div className="flex-1 mt-[88px] pl-64">
-          <main className="p-6 max-w-4xl mx-auto">
+          <main className="p-6 max-w-4xl mx-auto pt-8">
+            {/* Botón para volver atrás */}
+            <div className="mb-6">
+              <Button
+                onClick={() => router.back()}
+                variant="outline"
+                className="border-gray-600 hover:bg-gray-800 text-white text-sm"
+              >
+                ← Volver atrás
+              </Button>
+            </div>
+
             {/* Información del perfil */}
             <div className="bg-gray-900 rounded-lg p-6 mb-8">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">

@@ -180,7 +180,7 @@ export function ClientWeeklyPost({ postId }: { postId: string }) {
     return new Date(dateString).toLocaleDateString("es-ES", options);
   }  return (
     <div className="min-h-screen bg-black text-white pt-24">
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
         {/* Botones de navegación */}
         <div className="mb-6 flex justify-between">
           <Link href="/weekly">
@@ -203,10 +203,9 @@ export function ClientWeeklyPost({ postId }: { postId: string }) {
         ) : !post ? (
           <div className="text-center py-12 text-gray-400">
             Publicación no encontrada.
-          </div>
-        ) : (
+          </div>        ) : (
           <>            {/* Publicación semanal */}
-            <div className="mb-10 bg-gray-800 rounded-lg p-6">
+            <div className="mb-10">
               <div className="text-green-500 font-medium mb-2">{post.weekLabel}</div>
               <h1 className="text-3xl font-bold text-white mb-6">{post.title}</h1>
 
@@ -223,13 +222,13 @@ export function ClientWeeklyPost({ postId }: { postId: string }) {
                   </Link>
                 </div>
               )}
-            </div>
-
-            {/* Sección de reflexiones con mejor separación visual */}
+            </div>            {/* Sección de reflexiones con mejor separación visual */}
             <div className="mt-20 mb-16">
               {/* Separador más visible */}
-              <div className="border-t-2 border-gray-700 mb-16"></div>              {/* Sección de reflexiones con fondo diferenciado */}
-              <section id="reflexiones-comunidad" className="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <div className="border-t-2 border-gray-700 mb-16"></div>
+
+              {/* Sección de reflexiones */}
+              <section id="reflexiones-comunidad" className="rounded-lg p-6">
                 <div className="flex justify-between items-center mb-8">
                   <h2 className="text-3xl font-bold text-white">Reflexiones de la Comunidad</h2>
                   <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); }}>

@@ -152,12 +152,11 @@ export default function AllPostsPage() {
     }
     fetchAllPosts();
   }, [supabase, getTimeAgo, groupPostsByDate]);  return (
-    <div className="max-w-4xl mx-auto px-6 py-4">
-      <h1 className="text-3xl font-bold mb-4">Todas las Publicaciones</h1>
-      <div className="border-b border-gray-600 mb-8"></div>
+    <div className="max-w-4xl mx-auto px-6 py-12">
+      <h1 className="text-3xl font-bold mb-12 pt-8 text-center">Todas las Publicaciones</h1>
 
       {/* Lista de publicaciones */}
-      <div className="space-y-8">
+      <div className="space-y-8 mt-16">
         {loading ? (
           <div className="text-center py-8 text-gray-400">Cargando publicaciones...</div>
         ) : error ? (

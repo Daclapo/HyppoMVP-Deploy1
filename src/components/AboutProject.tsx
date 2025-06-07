@@ -38,28 +38,29 @@ export default function AboutProject() {
     { id: 'marca', label: 'Sobre la Marca' },
     { id: 'fundamentos', label: 'Fundamentos' },
   ];  return (
-    <div className="mt-14">
-      <div id="sobre-proyecto" className="-mt-14 pt-14 invisible"></div>
+    <div className="mt-20">
+      <div id="sobre-proyecto" className="-mt-20 pt-20 invisible"></div>
       <section className="mb-24 border-t border-gray-800 pt-10">
-      <h2 className="text-3xl font-bold text-white mb-8">Sobre el Proyecto</h2>
-
-      {/* Contenido Estático Principal */}
+      {/* Título oculto para SEO */}
+      <h2 className="sr-only">Sobre el Proyecto</h2>{/* Contenido Estático Principal */}
       <div className="text-gray-200 mb-12">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">          <div className="md:w-1/3">            <Image
+        <div className="flex flex-col items-center gap-8 mb-8">
+          <div className="w-full flex justify-center mb-6">
+            <Image
               src="/Hyppo-txt-h-Prociono-blanco.png"
               alt="Logo de Hyppo"
-              width={300}
-              height={100}
+              width={450}
+              height={150}
               className="rounded-lg"
             />
           </div>
 
-          <div className="md:w-2/3">
-            <p className="mb-4 leading-relaxed">
+          <div className="w-full">
+            <p className="mb-4 leading-relaxed text-center">
               Hyppo es un espacio digital donde el pensamiento crítico, la argumentación rigurosa
               y el intercambio respetuoso de ideas son el centro de todas las interacciones.
             </p>
-            <p className="leading-relaxed">
+            <p className="leading-relaxed text-center">
               A diferencia de las redes sociales tradicionales, Hyppo está diseñado para fomentar
               conversaciones profundas y significativas, priorizando la calidad sobre la cantidad,
               y la reflexión sobre la reacción inmediata.

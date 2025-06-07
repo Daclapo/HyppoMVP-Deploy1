@@ -121,10 +121,9 @@ export default function CompactSuggestionsList({ limit = 3, className = '' }: Co
       month: 'short',
       year: 'numeric'
     });
-  };
-  return (
+  };  return (
     <div className={`bg-gray-800 rounded-lg shadow-md p-4 ${className}`}>
-      <h2 className="text-3xl font-bold text-white mb-6">Sugerencias</h2>
+      {/* El título se oculta porque ya se muestra en la sección principal */}
 
       {error && (
         <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded-md mb-6">
