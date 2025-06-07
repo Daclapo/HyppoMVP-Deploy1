@@ -29,13 +29,12 @@ export const pagesMetadata: Record<string, PageMetadata> = {
   biblioteca: {
     title: 'Biblioteca | Hyppo',
     description: 'Recursos y guías para mejorar tus habilidades de pensamiento crítico y argumentación.',
-  },
-  tags: {
+  },  tags: {
     title: 'Etiquetas | Hyppo',
     description: 'Explora contenido por categorías y temas de interés.',
   },
   'all-posts': {
-    title: 'Todas las publicaciones | Hyppo',
+    title: 'Todos | Hyppo',
     description: 'Explora todas las publicaciones de la comunidad Hyppo.',
   },
   profile: {

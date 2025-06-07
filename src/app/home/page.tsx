@@ -228,10 +228,12 @@ export default function HomePage() {
       <section id="crear-publicacion" className="mt-24 mb-24 border-t border-gray-800 pt-10">
         <h2 className="text-3xl font-bold text-white mb-8">Crea una Nueva Publicación</h2>
         <CreatePostForm compact={true} />
-      </section>      {/* Sección Sobre el Proyecto con tabs */}
-      <AboutProject />      
-      {/* Sección de Sugerencias */}
+      </section>
+
+      {/* Sección Sobre el Proyecto con tabs */}
+      <AboutProject />      {/* Sección de Sugerencias */}
       <section id="sugerencias" className="mt-24 mb-24 border-t border-gray-800 pt-10">
+        <h2 className="text-3xl font-bold text-white mb-8">Sugerencias</h2>
         <SuggestionsList />
       </section>
     </div>

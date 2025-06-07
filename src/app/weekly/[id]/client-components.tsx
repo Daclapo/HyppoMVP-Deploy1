@@ -178,10 +178,9 @@ export function ClientWeeklyPost({ postId }: { postId: string }) {
     };
 
     return new Date(dateString).toLocaleDateString("es-ES", options);
-  }
-  return (
+  }  return (
     <div className="min-h-screen bg-black text-white pt-24">
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
         {/* Botones de navegación */}
         <div className="mb-6 flex justify-between">
           <Link href="/weekly">

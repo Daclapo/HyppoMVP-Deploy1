@@ -282,11 +282,9 @@ export default function ReflectionPage({ params }: { params: Promise<RouteParams
               About
             </a>
           </nav>
-        </aside>
-
-        {/* Main Content */}
+        </aside>        {/* Main Content */}
         <div className="flex-1 mt-[88px] pl-64">
-          <main className="p-6 max-w-4xl mx-auto">
+          <main className="p-6 max-w-5xl mx-auto">
             {loading ? (
               <div className="text-center py-12 text-gray-400">Cargando reflexión...</div>
             ) : !reflection ? (
@@ -296,7 +294,7 @@ export default function ReflectionPage({ params }: { params: Promise<RouteParams
             ) : (
               <>
                 {/* Botón de volver */}
-                <div className="mb-6">                  <Link href={`/weekly/${reflection.weekly_post_id}`}>
+                <div className="mb-6"><Link href={`/weekly/${reflection.weekly_post_id}`}>
                     <Button variant="outline" className="border-gray-600 hover:bg-gray-800 text-white">
                       ← Volver a "{reflection.weekly_post_title}"
                     </Button>

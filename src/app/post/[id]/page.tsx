@@ -336,7 +336,7 @@ export default function PostPage() {
         <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
           <Link href="/">
             <div className="flex items-center">
-              <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
+              <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={55} height={55} className="mr-2" />
             </div>
           </Link>
         </nav>
@@ -380,16 +380,14 @@ export default function PostPage() {
     : "Fecha desconocida";
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div id="top" className="min-h-screen bg-black text-white flex flex-col">
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
         <Link href="/">
           <div className="flex items-center">
             <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
           </div>
         </Link>
-      </nav>
-
-      <div className="flex-1 pt-24 pb-12 px-6">
+      </nav>      <div className="flex-1 pt-24 pb-12 px-6">
         <div className="max-w-3xl mx-auto">
           {/* Botón de volver */}
           <div className="mb-6">
@@ -504,7 +502,17 @@ export default function PostPage() {
             )}            {/* Formulario para añadir comentario */}
             {user ? (
               <div className="bg-gray-800/30 rounded-lg p-4">
-                <h3 className="text-sm font-medium mb-3 text-gray-300">Añadir un comentario</h3>
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-sm font-medium text-gray-300">Añadir un comentario</h3>
+                  <a href="#top">
+                    <Button
+                      variant="outline"
+                      className="border-gray-600 hover:bg-gray-800 text-white text-sm"
+                    >
+                      ↑ Volver al Inicio de la Publicación
+                    </Button>
+                  </a>
+                </div>
                 <textarea
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}

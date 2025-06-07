@@ -38,7 +38,9 @@ export default function AboutProject() {
     { id: 'marca', label: 'Sobre la Marca' },
     { id: 'fundamentos', label: 'Fundamentos' },
   ];  return (
-    <section id="sobre-proyecto" className="mt-24 mb-24 border-t border-gray-800 pt-10">
+    <div className="mt-14">
+      <div id="sobre-proyecto" className="-mt-14 pt-14 invisible"></div>
+      <section className="mb-24 border-t border-gray-800 pt-10"
       <div className="text-gray-200 mb-12">
         <div className="flex flex-col items-center gap-8 mb-8">
           <div className="w-full flex justify-center mb-6">
