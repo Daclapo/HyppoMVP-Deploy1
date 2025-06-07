@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node ./scripts/verify-deploy.js && node ./scripts/cleanup.js",
+    "prebuild": "node ./scripts/verify-deploy.cjs && node ./scripts/cleanup.cjs",
     "build": "next build",
-    "postbuild": "node ./scripts/fix-manifest.js",
+    "postbuild": "node ./scripts/fix-manifest.cjs",
     "start": "next start",
     "lint": "next lint",
-    "clean": "node ./scripts/verify-deploy.js"
+    "clean": "node ./scripts/verify-deploy.cjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
