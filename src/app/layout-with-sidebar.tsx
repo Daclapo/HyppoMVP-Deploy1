@@ -44,10 +44,9 @@ export default function LayoutWithSidebar({
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
+            </svg>          </button>
           <Link href="/">
-            <Image src="/logo1-Oscuro.png" alt="Logo" width={48} height={48} className="rounded-lg mr-2" />
+            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={55} height={55} className="mr-2" />
           </Link>
         </div>
 

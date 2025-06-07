@@ -30,14 +30,14 @@ const removeDirectory = (dirPath) => {
 // Función para buscar y eliminar archivos con un patrón específico
 const removeFilesWithPattern = (dir, pattern) => {
   if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) return 0;
-  
+
   let count = 0;
   try {
     const files = fs.readdirSync(dir, { withFileTypes: true });
-    
+
     for (const file of files) {
       const fullPath = path.join(dir, file.name);
-      
+
       if (file.isDirectory()) {
         // Recursivamente buscar en subdirectorios
         count += removeFilesWithPattern(fullPath, pattern);
@@ -51,7 +51,7 @@ const removeFilesWithPattern = (dir, pattern) => {
   } catch (err) {
     console.error(`Error al procesar directorio ${dir}:`, err);
   }
-  
+
   return count;
 };
 

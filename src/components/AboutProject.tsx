@@ -37,25 +37,21 @@ export default function AboutProject() {
     { id: 'comunidad', label: 'Nuestra Comunidad' },
     { id: 'marca', label: 'Sobre la Marca' },
     { id: 'fundamentos', label: 'Fundamentos' },
-  ];
-  return (
+  ];  return (
     <section id="sobre-proyecto" className="mt-24 mb-24 border-t border-gray-800 pt-10">
-      <h2 className="text-3xl font-bold text-white mb-8">Sobre el Proyecto</h2>
-
-      {/* Contenido Estático Principal */}
       <div className="text-gray-200 mb-12">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
-          <div className="md:w-1/3">
+        <div className="flex flex-col items-center gap-8 mb-8">
+          <div className="w-full flex justify-center mb-6">
             <Image
-              src="/Logo1-Oscuro.png"
+              src="/Hyppo-txt-h-Prociono-blanco.png"
               alt="Logo de Hyppo"
-              width={300}
-              height={300}
+              width={500}
+              height={166}
               className="rounded-lg"
             />
           </div>
 
-          <div className="md:w-2/3">
+          <div className="w-full">
             <p className="mb-4 leading-relaxed">
               Hyppo es un espacio digital donde el pensamiento crítico, la argumentación rigurosa
               y el intercambio respetuoso de ideas son el centro de todas las interacciones.

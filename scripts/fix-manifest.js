@@ -20,7 +20,7 @@ function directoryExists(dirPath) {
 // Función para crear un respaldo de un archivo
 function backupFile(filePath) {
   if (!fs.existsSync(filePath)) return false;
-  
+
   const backupPath = `${filePath}.bak`;
   try {
     fs.copyFileSync(filePath, backupPath);
@@ -35,24 +35,24 @@ function backupFile(filePath) {
 // Función para buscar y eliminar líneas con patrón en un archivo
 function removePatternFromFile(filePath, pattern) {
   if (!fs.existsSync(filePath)) return false;
-  
+
   try {
     // Crear respaldo
     backupFile(filePath);
-    
+
     // Leer contenido
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n');
-    
+
     // Filtrar líneas que contienen el patrón
     const filteredLines = lines.filter(line => !line.includes(pattern));
-    
+
     // Si no hubo cambios, no hacer nada
     if (filteredLines.length === lines.length) {
       console.log(`No se encontraron referencias a "${pattern}" en ${filePath}`);
       return false;
     }
-    
+
     // Escribir contenido filtrado
     fs.writeFileSync(filePath, filteredLines.join('\n'));
     console.log(`✅ Se eliminaron ${lines.length - filteredLines.length} líneas con "${pattern}" de ${filePath}`);
@@ -66,15 +66,15 @@ function removePatternFromFile(filePath, pattern) {
 // Función para buscar todos los archivos de manifiesto de cliente en .next
 function findManifestFiles(dirPath, pattern = '_client-reference-manifest.js') {
   if (!directoryExists(dirPath)) return [];
-  
+
   let results = [];
-  
+
   try {
     const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-    
+
     for (const entry of entries) {
       const fullPath = path.join(dirPath, entry.name);
-      
+
       if (entry.isDirectory()) {
         // Buscar recursivamente en subdirectorios
         results = results.concat(findManifestFiles(fullPath, pattern));
@@ -86,7 +86,7 @@ function findManifestFiles(dirPath, pattern = '_client-reference-manifest.js') {
   } catch (err) {
     console.error(`Error al buscar en ${dirPath}:`, err);
   }
-  
+
   return results;
 }
 
@@ -108,7 +108,7 @@ if (manifestFiles.length === 0) {
   console.log(`❌ No se encontraron archivos de manifiesto de cliente.`);
 } else {
   console.log(`✅ Se encontraron ${manifestFiles.length} archivos de manifiesto de cliente.`);
-  
+
   // Procesar cada archivo de manifiesto
   let fixedCount = 0;
   for (const file of manifestFiles) {
@@ -116,7 +116,7 @@ if (manifestFiles.length === 0) {
     const wasFixed = removePatternFromFile(file, '(home)');
     if (wasFixed) fixedCount++;
   }
-  
+
   console.log(`\n📝 Resumen:`);
   console.log(`- Total de archivos de manifiesto encontrados: ${manifestFiles.length}`);
   console.log(`- Archivos modificados: ${fixedCount}`);
@@ -127,15 +127,15 @@ console.log(`\n🔍 Buscando archivos y directorios con (home) en el nombre...`)
 
 function removeItemsWithPattern(dirPath, pattern) {
   if (!directoryExists(dirPath)) return 0;
-  
+
   let count = 0;
-  
+
   try {
     const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-    
+
     for (const entry of entries) {
       const fullPath = path.join(dirPath, entry.name);
-      
+
       // Si el nombre coincide con el patrón, eliminarlo
       if (entry.name.includes(pattern)) {
         console.log(`Eliminando ${fullPath}...`);
@@ -151,7 +151,7 @@ function removeItemsWithPattern(dirPath, pattern) {
           console.error(`❌ Error al eliminar ${fullPath}:`, err);
         }
       }
-      
+
       // Si es un directorio, buscar recursivamente
       if (entry.isDirectory() && !entry.name.includes(pattern)) {
         count += removeItemsWithPattern(fullPath, pattern);
@@ -160,7 +160,7 @@ function removeItemsWithPattern(dirPath, pattern) {
   } catch (err) {
     console.error(`Error al procesar ${dirPath}:`, err);
   }
-  
+
   return count;
 }
 

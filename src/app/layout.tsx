@@ -18,6 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Hyppo - Plataforma de pensamiento crítico",
   description: "Un espacio para compartir y desarrollar ideas, hipótesis y argumentos de manera rigurosa.",
+  icons: {
+    icon: '/Hyppo-logo-blanco-v1.png',
+    apple: '/Hyppo-logo-blanco-v1.png',
+  },
 };
 
 export default function RootLayout({

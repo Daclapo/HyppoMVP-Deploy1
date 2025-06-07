@@ -148,10 +148,9 @@ export default function CreateWeeklyPostPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
-        <div className="flex items-center">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">        <div className="flex items-center">
           <Link href="/">
-            <Image src="/logo1-Oscuro.png" alt="Logo" width={48} height={48} className="rounded-lg mr-2" />
+            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
           </Link>
         </div>
 

@@ -38,13 +38,13 @@ const removeDirectory = (dirPath) => {
 // Función para eliminar archivos que contienen cierto patrón
 const removeFilesWithPattern = (dir, pattern) => {
   if (!directoryExists(dir)) return;
-  
+
   try {
     const files = fs.readdirSync(dir, { withFileTypes: true });
-    
+
     for (const file of files) {
       const fullPath = path.join(dir, file.name);
-      
+
       if (file.isDirectory()) {
         // Recursivamente buscar en subdirectorios
         removeFilesWithPattern(fullPath, pattern);
@@ -63,13 +63,13 @@ const removeFilesWithPattern = (dir, pattern) => {
 const ensureHomePage = () => {
   const mainPagePath = path.join(appDir, 'page.tsx');
   const homePagePath = path.join(appDir, 'home', 'page.tsx');
-  
+
   // Crear directorio 'home' si no existe
   if (!directoryExists(path.join(appDir, 'home'))) {
     console.log('Creando directorio home...');
     fs.mkdirSync(path.join(appDir, 'home'), { recursive: true });
   }
-  
+
   // Si no existe page.tsx en /home pero existe en /app, copiarlo
   if (!fs.existsSync(homePagePath) && fs.existsSync(mainPagePath)) {
     console.log('Copiando página principal a home/page.tsx...');
@@ -80,28 +80,28 @@ const ensureHomePage = () => {
 // Principal función de limpieza
 const cleanup = () => {
   console.log('🧹 Iniciando limpieza previa a la compilación...');
-  
+
   // 1. Eliminar directorio (home) si existe
   const homeDir = path.join(appDir, '(home)');
   removeDirectory(homeDir);
-  
+
   // 2. Limpiar cache de Next.js
   if (directoryExists(nextCacheDir)) {
     console.log('Limpiando caché de Next.js...');
     removeDirectory(nextCacheDir);
   }
-  
+
   // 3. Eliminar archivos del manifiesto relacionados con (home)
   if (directoryExists(path.join(nextCacheDir, 'server'))) {
     removeFilesWithPattern(
-      path.join(nextCacheDir, 'server'), 
+      path.join(nextCacheDir, 'server'),
       '(home)'
     );
   }
-  
+
   // 4. Asegurar que existe una página home alternativa
   ensureHomePage();
-  
+
   console.log('✅ Limpieza completada con éxito');
 };
 
