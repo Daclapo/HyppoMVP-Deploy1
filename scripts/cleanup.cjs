@@ -3,14 +3,9 @@
  * con el directorio especial "(home)" en Next.js
  */
 
-import fs from 'fs';
-import path from 'path';
-import { execSync } from 'child_process';
-import { fileURLToPath } from 'url';
-
-// Obtener __dirname equivalente en ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
 
 // Ruta al directorio de la aplicación
 const appDir = path.join(process.cwd(), 'src', 'app');

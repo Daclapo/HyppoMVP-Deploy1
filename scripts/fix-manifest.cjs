@@ -3,13 +3,8 @@
  * en los archivos de manifiesto de cliente que causan errores en Vercel
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Obtener __dirname equivalente en ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fs = require('fs');
+const path = require('path');
 
 console.log('🔍 EJECUTANDO FIX-MANIFEST: Buscando y eliminando referencias a (home) en el manifiesto de cliente...');
 

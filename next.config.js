@@ -54,8 +54,7 @@ const nextConfig = {
         maxAge: 172800000 // 2 días en milisegundos
       };
     }
-    return config;
-  },
+    return config;  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
