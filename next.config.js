@@ -1,9 +1,24 @@
 // next.config.js
-const path = require('path');
+import path from 'path';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Configuración de redirecciones
+  async redirects() {
+    return [
+      {
+        source: '/semanal',
+        destination: '/weekly',
+        permanent: true, // Redirección 308 (permanente)
+      },
+      {
+        source: '/semanal/:id',
+        destination: '/weekly/:id',
+        permanent: true, // Redirección 308 (permanente)
+      },
+    ];
+  },
   // Configuración de imágenes
   images: {
     remotePatterns: [

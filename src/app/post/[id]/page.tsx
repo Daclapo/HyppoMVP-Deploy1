@@ -378,7 +378,6 @@ export default function PostPage() {
         day: "numeric"
       })
     : "Fecha desconocida";
-
   return (
     <div id="top" className="min-h-screen bg-black text-white flex flex-col">
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">
@@ -387,17 +386,27 @@ export default function PostPage() {
             <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
           </div>
         </Link>
-      </nav>      <div className="flex-1 pt-24 pb-12 px-6">
+      </nav>
+      
+      <div className="flex-1 pt-24 pb-12 px-6">
         <div className="max-w-3xl mx-auto">
-          {/* Botón de volver */}
-          <div className="mb-6">
+          {/* Botones de navegación */}
+          <div className="flex justify-between mb-6">
             <Button
+              onClick={() => router.back()}
               variant="outline"
-              className="border-gray-600 hover:bg-gray-800 text-white"
-              onClick={() => window.history.back()}
+              className="border-gray-600 hover:bg-gray-800 text-white text-sm"
             >
-              ← Volver
+              ← Volver atrás
             </Button>
+            <a href="#top">
+              <Button
+                variant="outline"
+                className="border-gray-600 hover:bg-gray-800 text-white text-sm"
+              >
+                ↑ Volver al inicio
+              </Button>
+            </a>
           </div>
 
           {/* Cabecera del post */}

@@ -40,20 +40,21 @@ export default function AboutProject() {
   ];  return (
     <div className="mt-14">
       <div id="sobre-proyecto" className="-mt-14 pt-14 invisible"></div>
-      <section className="mb-24 border-t border-gray-800 pt-10"
+      <section className="mb-24 border-t border-gray-800 pt-10">
+      <h2 className="text-3xl font-bold text-white mb-8">Sobre el Proyecto</h2>
+
+      {/* Contenido Estático Principal */}
       <div className="text-gray-200 mb-12">
-        <div className="flex flex-col items-center gap-8 mb-8">
-          <div className="w-full flex justify-center mb-6">
-            <Image
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">          <div className="md:w-1/3">            <Image
               src="/Hyppo-txt-h-Prociono-blanco.png"
               alt="Logo de Hyppo"
-              width={500}
-              height={166}
+              width={300}
+              height={100}
               className="rounded-lg"
             />
           </div>
 
-          <div className="w-full">
+          <div className="md:w-2/3">
             <p className="mb-4 leading-relaxed">
               Hyppo es un espacio digital donde el pensamiento crítico, la argumentación rigurosa
               y el intercambio respetuoso de ideas son el centro de todas las interacciones.
@@ -166,9 +167,9 @@ export default function AboutProject() {
                 el rol del diálogo racional en la formación de consensos, también son pilares conceptuales de nuestra plataforma.
               </p>
             </div>
-          )}
-        </div>
+          )}        </div>
       </div>
     </section>
+  </div>
   );
 }

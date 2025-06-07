@@ -22,9 +22,8 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   if (!content) {
     return <div className="text-gray-400">No hay contenido disponible</div>;
   }
-
   return (
-    <div className="prose prose-invert prose-sm sm:prose-base max-w-none whitespace-pre-wrap">
+    <div className="prose prose-invert prose-sm sm:prose-base max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
@@ -38,12 +37,11 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           p: ({node, ...props}) => <p className="mb-4 leading-relaxed" {...props} />,
           a: ({node, ...props}) => <a className="text-green-500 hover:text-green-400 underline" {...props} />,
           ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-6" {...props} />,
-          ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-6" {...props} />,
-          li: ({node, ...props}) => <li className="mb-2" {...props} />,
+          ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-6 ml-0" {...props} />,
+          li: ({node, ...props}) => <li className="mb-2 pl-1" {...props} />,
           blockquote: ({node, ...props}) => (
             <blockquote className="border-l-4 border-green-500 pl-4 italic my-6" {...props} />
-          ),
-          code({node, inline, className, children, ...props}) {
+          ),          code({node, inline, className, children, ...props}: any) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
               <SyntaxHighlighter
