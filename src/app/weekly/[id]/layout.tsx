@@ -5,5 +5,11 @@ export default function WeeklyPostLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <LayoutWithSidebar>{children}</LayoutWithSidebar>;
+  return (
+    <LayoutWithSidebar>
+      <div className="max-w-5xl mx-auto">
+        {children}
+      </div>
+    </LayoutWithSidebar>
+  );
 }

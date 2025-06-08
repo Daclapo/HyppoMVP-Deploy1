@@ -34,7 +34,7 @@ export const pagesMetadata: Record<string, PageMetadata> = {
     description: 'Explora contenido por categorías y temas de interés.',
   },
   'all-posts': {
-    title: 'Todos | Hyppo',
+    title: 'Todo | Hyppo',
     description: 'Explora todas las publicaciones de la comunidad Hyppo.',
   },
   profile: {
