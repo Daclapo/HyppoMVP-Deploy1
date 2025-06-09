@@ -1,4 +1,5 @@
 import LayoutWithSidebar from '../../layout-with-sidebar';
+import WeeklyLayoutAdjuster from './weekly-layout-adjuster';
 
 export default function WeeklyPostLayout({
   children,
@@ -7,6 +8,8 @@ export default function WeeklyPostLayout({
 }) {
   return (
     <LayoutWithSidebar>
+      {/* Este componente ajusta el layout específico para esta ruta */}
+      <WeeklyLayoutAdjuster />
       <div className="max-w-5xl mx-auto">
         {children}
       </div>

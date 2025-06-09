@@ -1,0 +1,21 @@
+/* Estilos específicos para la página weekly/[id] */
+
+/* Anulamos el pl-60 del LayoutWithSidebar solo para esta ruta */
+.weekly-post-container {
+  /* Estos estilos se aplicarán solo a las páginas dentro de weekly/[id] */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Sobreescribimos los estilos del layout con sidebar solo para esta ruta */
+:global(.content-with-sidebar) {
+  padding-left: 30px !important; /* Reducimos el padding como mencionaste */
+}
+
+/* Media queries para ajustar responsivamente */
+@media (max-width: 1024px) {
+  :global(.content-with-sidebar) {
+    padding-left: 0 !important; /* En pantallas pequeñas, eliminamos el padding */
+  }
+}
