@@ -1,12 +1,20 @@
 "use client"
 import Link from "next/link"
-import Image from "next/image"
-import UserMenuNew from "@/components/UserMenuNew"
+import { Button } from "@/components/ui/button"
 import CreatePostForm from "@/components/CreatePostForm"
 import { useAuth } from "@/context/AuthContext"
+import CreatePostLayoutAdjuster from "./create-post-layout-adjuster"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function CreatePostPage() {
   const { user } = useAuth()
+  const router = useRouter()
+
+  // Efecto para resetear el scroll cuando el componente se monta
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Si no está autenticado, mostrar un mensaje o redirigir
   if (!user) {
@@ -14,78 +22,25 @@ export default function CreatePostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
-      {/* Navbar básico */}      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-6 bg-black">        <Link href="/">
-          <div className="flex items-center">
-            <Image src="/Hyppo-logo-blanco-v1.png" alt="Hyppo Logo" width={120} height={40} className="mr-2" />
-          </div>
-        </Link>
-        <UserMenuNew />
-      </nav>
+    <>
+      {/* Este componente ajusta el layout específico para esta ruta */}
+      <CreatePostLayoutAdjuster />
 
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="fixed top-20 left-0 w-64 p-6 h-screen bg-black pt-[88px]">
-          {/* Navigation Links - Top Section */}
-          <nav className="space-y-4 mb-16">
-            <Link href="/" className="block text-white hover:text-gray-300 text-lg">
-              Inicio
-            </Link>
-            <Link href="/all-posts" className="block text-white hover:text-gray-300 text-lg">
-              Todo
-            </Link>
-            <Link href="/tags" className="block text-white hover:text-gray-300 text-lg">
-              Etiquetas
-            </Link>
-            <Link href="/debates" className="block text-white hover:text-gray-300 text-lg">
-              Debates
-            </Link>
-            <Link href="/weekly" className="block text-white hover:text-gray-300 text-lg">
-              Semanal
-            </Link>
-            <Link href="/library" className="block text-white hover:text-gray-300 text-lg">
-              Biblioteca
-            </Link>
-          </nav>
-
-          {/* Bottom Navigation */}
-          <nav className="space-y-4 absolute bottom-46">
-            <Link href="/create-post" className="block text-green-500 hover:text-green-400 text-lg font-medium">
-              Crear Publicación
-            </Link>
-            <Link href="/home#sugerencias" className="block text-white hover:text-gray-300 text-lg">
-              Sugerencias
-            </Link>
-            <Link href="/home#sobre-proyecto" className="block text-white hover:text-gray-300 text-lg">
-              Sobre el Proyecto
-            </Link>
-          </nav>        </aside>        {/* Main Content */}
-        <div className="flex-1 mt-[88px] pl-64 flex justify-center">
-          <main className="max-w-4xl w-full p-6">
-            <div className="flex items-center mb-6">
-              <Link href="/" className="text-gray-400 hover:text-white flex items-center mr-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="mr-1"
-                >
-                  <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                Volver
-              </Link>
-              <h1 className="text-2xl font-bold">Crear publicación</h1>
-            </div>
-            <CreatePostForm />
-          </main>
+      <div className="max-w-4xl mx-auto mt-14">
+        {/* Botón para volver/salir similar al de post/[id] */}
+        <div className="flex justify-between mb-6">
+          <Button
+            onClick={() => router.push('/home')}
+            variant="outline"
+            className="border-gray-600 hover:bg-gray-800 text-white text-sm"
+          >
+            ← Salir
+          </Button>
         </div>
+
+        <h1 className="text-2xl font-bold mb-6">Crear publicación</h1>
+        <CreatePostForm />
       </div>
-    </div>
+    </>
   )
 }
