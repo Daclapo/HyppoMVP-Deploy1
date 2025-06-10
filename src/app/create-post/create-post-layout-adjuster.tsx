@@ -19,8 +19,11 @@ export default function CreatePostLayoutAdjuster() {
       // Seleccionar el elemento con la clase content-with-sidebar
       const contentElement = document.querySelector('.content-with-sidebar');
 
-      // Para controlar la visibilidad del sidebar
-      const sidebarElement = document.querySelector('.hide-duplicate-sidebar');
+      // Para acceder al botón de hamburguesa
+      const hamburgerButton = document.querySelector('button[aria-label="Toggle menu"]');
+
+      // Para acceder al elemento que controla la visibilidad del sidebar
+      const sidebarElement = document.querySelector('aside.fixed');
 
       if (contentElement) {
         // Guardar el valor original del paddingLeft
@@ -32,23 +35,31 @@ export default function CreatePostLayoutAdjuster() {
           contentElement.setAttribute('data-original-padding', originalPadding);
         }
 
-        // Aplicar el nuevo valor de padding según el ancho de pantalla
         if (window.innerWidth < COLLAPSE_BREAKPOINT) {
-          // Cuando es menor que nuestro breakpoint personalizado, colapsar el sidebar
+          // En pantallas menores a nuestro breakpoint personalizado
+
+          // 1. Ajustar el contenido para quitar el padding lateral
           (contentElement as HTMLElement).style.paddingLeft = '0px';
 
-          // Hacer que el contenido se centre correctamente
+          // 2. Centrar el contenido correctamente
           const maxWidthContent = document.querySelector('.max-w-4xl');
           if (maxWidthContent) {
             (maxWidthContent as HTMLElement).style.width = '90%';
-            (maxWidthContent as HTMLElement).style.maxWidth = '800px'; // Reducir ancho máximo
+            (maxWidthContent as HTMLElement).style.maxWidth = '800px';
             (maxWidthContent as HTMLElement).style.marginLeft = 'auto';
             (maxWidthContent as HTMLElement).style.marginRight = 'auto';
           }
 
-          // Forzar el estado colapsado del sidebar
+          // 3. Forzar que el sidebar esté oculto por defecto
           if (sidebarElement) {
-            sidebarElement.classList.add('force-mobile-view');
+            // Forzar la clase que oculta el sidebar en pantallas pequeñas
+            sidebarElement.classList.remove('lg:translate-x-0');
+            sidebarElement.classList.add('-translate-x-full');
+          }
+
+          // 4. Asegurarnos de que el botón de hamburguesa esté visible
+          if (hamburgerButton) {
+            (hamburgerButton as HTMLElement).classList.remove('lg:hidden');
           }
         } else {
           // En pantallas más grandes
@@ -63,25 +74,36 @@ export default function CreatePostLayoutAdjuster() {
             (maxWidthContent as HTMLElement).style.marginRight = 'auto';
           }
 
-          // Restaurar el estado normal del sidebar
+          // Restaurar el comportamiento normal del sidebar
           if (sidebarElement) {
-            sidebarElement.classList.remove('force-mobile-view');
+            sidebarElement.classList.add('lg:translate-x-0');
+            sidebarElement.classList.remove('-translate-x-full');
+          }
+
+          // Restaurar la visibilidad normal del botón de hamburguesa
+          if (hamburgerButton) {
+            (hamburgerButton as HTMLElement).classList.add('lg:hidden');
           }
         }
       }
     };
 
-    // Añadir estilos para forzar el modo móvil
-    const style = document.createElement('style');
-    style.textContent = `
-      .force-mobile-view .lg\\:block {
-        display: none !important;
-      }
-      .force-mobile-view .lg\\:hidden {
-        display: block !important;
+    // Sobreescribir el punto de quiebre de Tailwind para lg
+    const styleOverride = document.createElement('style');
+    styleOverride.textContent = `
+      @media (max-width: ${COLLAPSE_BREAKPOINT}px) {
+        .create-post-page .lg\\:translate-x-0 {
+          transform: translateX(-100%) !important;
+        }
+        .create-post-page .lg\\:hidden {
+          display: block !important;
+        }
+        .create-post-page .lg\\:w-60 {
+          width: 0 !important;
+        }
       }
     `;
-    document.head.appendChild(style);
+    document.head.appendChild(styleOverride);
 
     // Aplicar los ajustes inmediatamente
     adjustLayout();
@@ -92,7 +114,7 @@ export default function CreatePostLayoutAdjuster() {
     // Limpiar cuando el componente se desmonte
     return () => {
       document.body.classList.remove('create-post-page');
-      document.head.removeChild(style);
+      document.head.removeChild(styleOverride);
       window.removeEventListener('resize', adjustLayout);
 
       // Restaurar el padding original
@@ -104,10 +126,19 @@ export default function CreatePostLayoutAdjuster() {
         }
       }
 
-      // Eliminar cualquier clase de forzado de modo móvil
-      const sidebarElement = document.querySelector('.hide-duplicate-sidebar');
+      // Restaurar los estilos normales
+      const sidebarElement = document.querySelector('aside.fixed');
       if (sidebarElement) {
-        sidebarElement.classList.remove('force-mobile-view');
+        sidebarElement.classList.add('lg:translate-x-0');
+        if (window.innerWidth >= 1024) {
+          sidebarElement.classList.remove('-translate-x-full');
+        }
+      }
+
+      // Restaurar el botón de hamburguesa
+      const hamburgerButton = document.querySelector('button[aria-label="Toggle menu"]');
+      if (hamburgerButton && window.innerWidth >= 1024) {
+        (hamburgerButton as HTMLElement).classList.add('lg:hidden');
       }
 
       // Restaurar los estilos del contenido
