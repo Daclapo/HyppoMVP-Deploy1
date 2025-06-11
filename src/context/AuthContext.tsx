@@ -114,9 +114,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setSession(null)
       setUser(null)
-      setUsername('')
-      // Forzar navegación a la página principal después de cerrar sesión
-      router.push('/')
+      setUsername('')      // Forzar navegación a la página principal después de cerrar sesión
+      router.push('/home')
       router.refresh()
     } catch (err) {
       console.error('Error inesperado al cerrar sesión:', err)

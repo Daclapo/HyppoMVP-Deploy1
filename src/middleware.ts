@@ -45,10 +45,9 @@ export async function middleware(request: NextRequest) {
     const redirectUrl = new URL('/login', request.url)
     return NextResponse.redirect(redirectUrl)
   }
-
   // Si hay usuario y está en login/signup, redirigir a home
   if (user && (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/signup')) {
-    const redirectUrl = new URL('/', request.url)
+    const redirectUrl = new URL('/home', request.url)
     return NextResponse.redirect(redirectUrl)
   }
 

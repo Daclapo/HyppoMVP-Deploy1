@@ -65,12 +65,10 @@ export default function SignupPage() {
       if (error) {
         setError(error.message)
         return
-      }
-
-      // El perfil se creará automáticamente mediante un trigger en Supabase
+      }      // El perfil se creará automáticamente mediante un trigger en Supabase
 
       // Redireccionar a la página principal después de registrarse
-      router.push("/")
+      router.push("/home")
       router.refresh()
     } catch (err) {
       console.error("Error durante el registro:", err)

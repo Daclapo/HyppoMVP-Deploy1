@@ -17,11 +17,10 @@ export default function LoginPage() {
   const router = useRouter()
   const supabase = createClient()
   const { user } = useAuth()
-
   // Redirigir si ya está autenticado
   useEffect(() => {
     if (user) {
-      router.push("/")
+      router.push("/home")
     }
   }, [user, router])
 
@@ -39,12 +38,10 @@ export default function LoginPage() {
       if (error) {
         setError(error.message)
         return
-      }
-
-      // Esperar un momento para que se establezca la sesión
+      }      // Esperar un momento para que se establezca la sesión
       setTimeout(() => {
         // Redireccionar a la página principal después de iniciar sesión
-        router.push("/")
+        router.push("/home")
         router.refresh()
       }, 500)
     } catch (err) {
