@@ -123,12 +123,11 @@ export default function CreateReflectionPage({ params }: { params: Promise<Route
       setSubmitting(false);
     }
   };
-
   // Función para generar etiqueta de semana
   function getWeekLabel(weekNumber: number, year: number): string {
     const monthNames = [
-      "enero", "febrero", "marzo", "abril", "mayo", "junio",
-      "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ];
 
     // Obtener fecha a partir del número de semana y año
@@ -139,7 +138,7 @@ export default function CreateReflectionPage({ params }: { params: Promise<Route
     const weekOfMonth = Math.ceil(date.getDate() / 7);
     const weekOrdinal = ["Primera", "Segunda", "Tercera", "Cuarta", "Quinta"][weekOfMonth - 1] || "Última";
 
-    return `${weekOrdinal} semana de ${monthNames[month]} ${year}`;
+    return `${weekOrdinal} Semana de ${monthNames[month]} de ${year}`;
   }
 
   // Función auxiliar para obtener fecha a partir de número de semana y año

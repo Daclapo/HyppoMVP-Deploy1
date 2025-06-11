@@ -149,22 +149,15 @@ export function ClientWeeklyPost({ postId }: { postId: string }) {
 
     return `${weekOrdinal} Semana de ${monthNames[month]} de ${year}`;
   }
-
   // Función auxiliar para obtener fecha a partir de número de semana y año
   function getDateOfWeek(week: number, year: number): Date {
-    const januaryFirst = new Date(year, 0, 1);
+    // Usamos el mismo método que en weekly/page.tsx para consistencia
+    const firstDayOfYear = new Date(year, 0, 1);
     const daysOffset = (week - 1) * 7;
+    const weekDate = new Date(firstDayOfYear);
+    weekDate.setDate(firstDayOfYear.getDate() + daysOffset);
 
-    // Encontrar el primer día de la semana (lunes)
-    const firstDayOfWeek = 1; // Lunes es 1, domingo es 0
-    const firstDayOfYear = januaryFirst.getDay() || 7; // Convertir domingo (0) a 7
-    const daysToFirstMonday = (firstDayOfWeek - firstDayOfYear + 7) % 7;
-
-    const firstMonday = new Date(year, 0, 1 + daysToFirstMonday);
-    const targetDate = new Date(firstMonday);
-    targetDate.setDate(firstMonday.getDate() + daysOffset);
-
-    return targetDate;
+    return weekDate;
   }
 
   // Formatear fecha
