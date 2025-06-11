@@ -55,16 +55,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             className={`flex items-center px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors ${
               isActive('/tags') ? 'bg-gray-800 text-green-500' : 'text-white'
             }`}
-          >
-            <span>Etiquetas</span>
+          >            <span>Etiquetas</span>
           </Link>          <Link
-            href="/library"
+            href="/weekly"
             onClick={handleLinkClick}
             className={`flex items-center px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors ${
-              isActive('/library') ? 'bg-gray-800 text-green-500' : 'text-white'
+              isActive('/weekly') ? 'bg-gray-800 text-green-500' : 'text-white'
             }`}
           >
-            <span>Biblioteca</span>
+            <span>Semanal</span>
           </Link>          <Link
             href="/debates"
             onClick={handleLinkClick}
@@ -74,13 +73,13 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           >
             <span>Debates</span>
           </Link>          <Link
-            href="/weekly"
+            href="/library"
             onClick={handleLinkClick}
             className={`flex items-center px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors ${
-              isActive('/weekly') ? 'bg-gray-800 text-green-500' : 'text-white'
+              isActive('/library') ? 'bg-gray-800 text-green-500' : 'text-white'
             }`}
           >
-            <span>Semanal</span>
+            <span>Biblioteca</span>
           </Link>        </div>          {/* Enlaces de pie de página - en el orden correcto */}<div className="mt-auto pt-8 pb-16 space-y-2">          <Link
             href="/home#crear-publicacion"
             onClick={handleLinkClick}
