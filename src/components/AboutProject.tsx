@@ -37,7 +37,7 @@ export default function AboutProject() {
     { id: 'fundamentos', label: 'Fundamentos' },
     { id: 'licencia', label: 'Derechos de Autor' },
   ];return (
-    <div className="mt-20">
+    <div className="mt-20 select-none">
       <div id="sobre-proyecto" className="-mt-20 pt-20 invisible"></div>
       <section className="mb-24 border-t border-gray-800 pt-10">
       {/* Título oculto para SEO */}
@@ -56,13 +56,10 @@ export default function AboutProject() {
 
           <div className="w-full">
             <p className="mb-4 leading-relaxed text-center">
-              Hyppo es un espacio digital donde el pensamiento crítico, la argumentación rigurosa
-              y el intercambio respetuoso de ideas son el centro de todas las interacciones.
+            Hyppo es un espacio digital donde el pensamiento crítico, la argumentación rigurosa y el intercambio respetuoso de ideas son el centro de todas las interacciones. Este proyecto nace como una infraestructura para el diálogo razonado. Está diseñado para fomentar conversaciones profundas y significativas, y la construcción colectiva del conocimiento, donde la reflexión se antepone a la reacción y la profundidad a la superficialidad.
             </p>
             <p className="leading-relaxed text-center">
-              A diferencia de las redes sociales tradicionales, Hyppo está diseñado para fomentar
-              conversaciones profundas y significativas, priorizando la calidad sobre la cantidad,
-              y la reflexión sobre la reacción inmediata.
+            Este sitio web es el MVP (Producto Mínimo Viable) del proyecto Hyppo, cuyo objetivo es evaluar la demanda del público general por una plataforma como la que se plantea. En caso de tener buena recepción, se lanzará Hyppo como un proyecto Open Source bajo la licencia GPLv3, permitiendo que cualquier persona pueda contribuir, tanto técnica como no técnicamente, con propuestas y desarrollos.
             </p>
           </div>
         </div>
@@ -171,7 +168,7 @@ export default function AboutProject() {
                   <Image
                     src="/oxpecker-on-hippo.jpg"
                     alt="Picabuey sobre hipopótamo - Representación de la simbiosis"
-                    width={300}
+                    width={550}
                     height={300}
                     className="rounded-lg"
                   />

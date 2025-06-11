@@ -16,18 +16,23 @@ export const documentosDelaBiblioteca = [
     description: "Comportamientos que fomentan un diálogo constructivo y respetuoso."
   },
   {
+    id: "tolerancia",
+    title: "Tolerancia",
+    description: "Cómo practicar y promover la tolerancia en nuestros debates y conversaciones."
+  },
+  {
     id: "codigos-logicos",
-    title: "Códigos lógicos",
+    title: "Construyendo un Argumento Sólido: Lógica y Razonamiento",
     description: "Principios de razonamiento y argumentación para discusiones efectivas."
   },
   {
     id: "falacias-logicas",
-    title: "Falacias lógicas comunes",
+    title: "Navegando el Discurso: Guía de Falacias Lógicas y Sesgos Cognitivos",
     description: "Errores de razonamiento que debemos evitar en nuestras discusiones."
   },
   {
-    id: "tolerancia",
-    title: "Tolerancia",
-    description: "Cómo practicar y promover la tolerancia en nuestros debates y conversaciones."
+    id: "modelo-dialectico",
+    title: "El Motor del Progreso: El Modelo Dialéctico",
+    description: "Cómo la dialéctica impulsa el avance del conocimiento y el entendimiento colectivo."
   },
 ];
