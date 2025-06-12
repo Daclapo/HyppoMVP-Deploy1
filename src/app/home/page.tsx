@@ -27,7 +27,9 @@ const filterTabs = [
 export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState("Recientes")
   const [posts, setPosts] = useState<Post[]>([]);
+  const [allPosts, setAllPosts] = useState<Post[]>([]); // Almacenamos todos los posts cargados
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false); // Estado para controlar si la lista está expandida
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const supabase = createClient();
@@ -41,7 +43,7 @@ export default function HomePage() {
     try {
       // Si es una nueva carga, resetear la página
       const currentPage = resetPage ? 0 : page;
-      const limit = currentPage === 0 ? 10 : 20; // 10 iniciales, luego 20 por carga
+      const limit = 20; // Siempre cargamos 20 posts
       const from = currentPage === 0 ? 0 : 10 + (currentPage - 1) * 20;
 
       console.log(`Cargando posts: Filtro=${activeFilter}, Página=${currentPage}, Desde=${from}, Límite=${limit}`);
@@ -89,15 +91,34 @@ export default function HomePage() {
 
       console.log(`Posts cargados: ${formattedPosts.length}`);
 
-      // Si es una nueva carga, reemplazar posts, si no, añadir
+      // Guardar todos los posts cargados
       if (resetPage) {
-        setPosts(formattedPosts);
-        setPage(0);
+        setAllPosts(formattedPosts);
       } else {
-        setPosts(prev => [...prev, ...formattedPosts]);
-        setPage(currentPage + 1);
+        setAllPosts(prev => [...prev, ...formattedPosts]);
       }
 
+      // Actualizar la vista según si está expandido o no
+      if (expanded) {
+        if (resetPage) {
+          setPosts(formattedPosts);
+        } else {
+          setPosts(prev => [...prev, ...formattedPosts]);
+        }
+      } else {
+        // Si no está expandido, mostrar solo los primeros 10
+        const postsToShow = resetPage 
+          ? formattedPosts.slice(0, 10) 
+          : [...allPosts, ...formattedPosts].slice(0, 10);
+        
+        setPosts(postsToShow);
+      }
+
+      // Actualizar la página
+      if (!resetPage) {
+        setPage(currentPage + 1);
+      }
+      
       // Determinar si hay más posts para cargar
       setHasMore(data.length === limit);
     } catch (err) {
@@ -105,16 +126,23 @@ export default function HomePage() {
     } finally {
       setLoading(false);
     }
-  }, [page, activeFilter, supabase]);
-
+  }, [page, activeFilter, supabase, expanded, allPosts]);
   // Cargar posts cuando cambia el filtro o al inicio
   useEffect(() => {
-    // Resetear estado cuando cambia el filtro
-    setPage(0);
-    setPosts([]);
-    setLoading(true);
-    loadPosts(true);
-  }, [activeFilter, loadPosts]); // Incluir loadPosts como dependencia
+    // Función interna para evitar dependencia de loadPosts
+    const initialLoad = async () => {
+      // Resetear estado cuando cambia el filtro
+      setPage(0);
+      setPosts([]);
+      setAllPosts([]);
+      setExpanded(false);
+      setLoading(true);
+      await loadPosts(true);
+    };
+    
+    initialLoad();
+    // Solo recargar cuando cambia el filtro, no cuando cambia loadPosts
+  }, [activeFilter]);
 
   // Función para calcular el tiempo relativo
   function getTimeAgo(date: Date): string {
@@ -149,7 +177,21 @@ export default function HomePage() {
       const years = Math.floor(diffInSeconds / year);
       return `${years}a`;
     }
-  }  return (
+  }
+  // Función para expandir o colapsar la lista
+  const handleExpandCollapse = useCallback(() => {
+    if (expanded) {
+      // Colapsar - mostrar solo los primeros 10
+      setPosts(allPosts.slice(0, 10));
+      setExpanded(false);
+    } else {
+      // Expandir - mostrar todos los posts cargados
+      setPosts(allPosts);
+      setExpanded(true);
+    }
+  }, [expanded, allPosts]);
+
+  return (
     <div className="max-w-4xl mx-auto px-6">
       {/* Filtros */}
       <div className="flex mb-8 border-b border-gray-800 overflow-x-auto">
@@ -211,20 +253,38 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      )}
-
-      {/* Botón para cargar más */}
-      {hasMore && (
-        <div className="text-center py-4">
+      )}      {/* Botón para cargar más o colapsar */}
+      <div className="text-center py-4">
+        {expanded ? (
           <Button
             className="bg-gray-800 hover:bg-gray-700 text-white"
-            onClick={() => loadPosts()}
+            onClick={handleExpandCollapse}
+            disabled={loading}
+          >
+            Colapsar
+          </Button>
+        ) : (
+          allPosts.length > 10 && (
+            <Button
+              className="bg-gray-800 hover:bg-gray-700 text-white"
+              onClick={handleExpandCollapse}
+              disabled={loading}
+            >
+              Expandir listado
+            </Button>
+          )
+        )}
+        
+        {!expanded && hasMore && (
+          <Button
+            className="bg-gray-800 hover:bg-gray-700 text-white ml-2"
+            onClick={() => !loading && loadPosts(false)}
             disabled={loading}
           >
             {loading ? "Cargando..." : "Cargar más"}
           </Button>
-        </div>
-      )}      {/* Sección para crear publicación */}
+        )}
+      </div>{/* Sección para crear publicación */}
       <section id="crear-publicacion" className="mt-40 mb-40 border-t border-gray-800 pt-16">
         <h2 className="text-3xl font-bold text-white mb-8">Crea una nueva publicación</h2>
         <CreatePostForm compact={true} />
