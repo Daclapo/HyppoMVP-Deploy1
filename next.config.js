@@ -35,31 +35,18 @@ const nextConfig = {
       },
     ],
     formats: ['image/webp'],
-  },  // Deshabilitar la comprobación de ESLint durante la compilación
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   typescript: {
     // ⚠️ Peligroso pero necesario para el deploy
     ignoreBuildErrors: true,
-  },  // Configuración experimental para resolver problemas con el manifiesto de cliente
+  },
+  // Configuración experimental para resolver problemas con el manifiesto de cliente
   experimental: {
     // Optimización de CSS que requiere el módulo critters
     optimizeCss: true
   },
-  webpack: (config, { dev }) => {
-    if (dev) {
-      config.cache = {
-        type: 'filesystem',
-        buildDependencies: {
-          config: [__filename]
-        },
-        // Usar ruta absoluta para cacheDirectory
-        cacheDirectory: path.resolve(__dirname, '.next/cache'),
-        maxAge: 172800000 // 2 días en milisegundos
-      };
-    }
-    return config;  },
+  // Configuración de Turbopack (requerido en Next.js 16)
+  turbopack: {},
 };
 
 export default nextConfig;
